@@ -1,25 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import H1 from './H1';
+import H2 from './H2';
+import H3 from './H3';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loggedIn: false,
+      click: 0
+    }
+  }
+
+  updateClickCount() {
+    this.setState({
+      click: this.state.click + 1
+    })
+  }
+
+  reset(){
+    this.setState({
+      click: 0
+    })
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <H1 />
+        <H2 clickCount={this.state.click} onReset={this.reset.bind(this)} />
+        <H3 onClickProp={this.updateClickCount.bind(this)} />
       </div>
     );
   }
